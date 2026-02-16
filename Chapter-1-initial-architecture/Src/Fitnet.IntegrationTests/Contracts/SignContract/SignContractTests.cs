@@ -1,18 +1,19 @@
 namespace EvolutionaryArchitecture.Fitnet.IntegrationTests.Contracts.SignContract;
 
-using EvolutionaryArchitecture.Fitnet.Contracts;
-using EvolutionaryArchitecture.Fitnet.Contracts.PrepareContract;
-using EvolutionaryArchitecture.Fitnet.Contracts.SignContract;
+using EvolutionaryArchitecture.Contracts.Application.PrepareContract;
+using EvolutionaryArchitecture.Contracts.Application.SignContract;
+using EvolutionaryArchitecture.Contracts.Application.SignContract.Events;
+using EvolutionaryArchitecture.Contracts.Infrastructure.Endpoints;
 using PrepareContract;
 using Common.TestEngine.Configuration;
-using Fitnet.Contracts.SignContract.Events;
-using EvolutionaryArchitecture.Fitnet.Common.Events.EventBus;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.TestHost;
+using ContractsEventBus = EvolutionaryArchitecture.Contracts.Application.IEventBus;
 
 public sealed class SignContractTests : IClassFixture<WebApplicationFactory<Program>>, IClassFixture<DatabaseContainer>, IAsyncLifetime
 {
     private readonly HttpClient _applicationHttpClient;
-    private readonly IEventBus _fakeEventBus = Substitute.For<IEventBus>();
+    private readonly ContractsEventBus _fakeContractsEventBus = Substitute.For<ContractsEventBus>();
     private readonly WebApplicationFactory<Program> _applicationInMemoryFactory;
 
     public SignContractTests(WebApplicationFactory<Program> applicationInMemoryFactory,
@@ -20,7 +21,8 @@ public sealed class SignContractTests : IClassFixture<WebApplicationFactory<Prog
     {
         _applicationInMemoryFactory = applicationInMemoryFactory;
         _applicationHttpClient = applicationInMemoryFactory
-            .WithFakeEventBus(_fakeEventBus)
+            .WithWebHostBuilder(webHostBuilder => webHostBuilder.ConfigureTestServices(services =>
+                services.AddSingleton(_fakeContractsEventBus)))
             .WithContainerDatabaseConfigured(database.ConnectionString!)
             .CreateClient();
     }
@@ -64,7 +66,7 @@ public sealed class SignContractTests : IClassFixture<WebApplicationFactory<Prog
         EnsureThatContractSignedEventWasPublished();
     }
 
-    private void EnsureThatContractSignedEventWasPublished() => _fakeEventBus.Received(1)
+    private void EnsureThatContractSignedEventWasPublished() => _fakeContractsEventBus.Received(1)
         .PublishAsync(Arg.Any<ContractSignedEvent>(), Arg.Any<CancellationToken>());
 
     [Fact]

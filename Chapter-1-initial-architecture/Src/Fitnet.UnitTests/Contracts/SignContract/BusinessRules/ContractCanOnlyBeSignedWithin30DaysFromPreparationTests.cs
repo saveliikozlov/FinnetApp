@@ -1,7 +1,7 @@
 namespace EvolutionaryArchitecture.Fitnet.UnitTests.Contracts.SignContract.BusinessRules;
 
-using EvolutionaryArchitecture.Fitnet.Contracts.SignContract.BusinessRules;
-using EvolutionaryArchitecture.Fitnet.Common.BusinessRulesEngine;
+using EvolutionaryArchitecture.Contracts.Domain.SignContract.BusinessRules;
+using EvolutionaryArchitecture.Contracts.Domain.BusinessRules;
 
 public sealed class ContractCanOnlyBeSignedWithin30DaysFromPreparationTests
 {

@@ -1,6 +1,6 @@
 namespace EvolutionaryArchitecture.Fitnet.UnitTests.Contracts.PrepareContract.RequestValidator;
 
-using EvolutionaryArchitecture.Fitnet.Contracts.PrepareContract;
+using EvolutionaryArchitecture.Contracts.Application.PrepareContract;
 using FluentValidation.TestHelper;
 
 public sealed class PrepareContractRequestValidatorTests

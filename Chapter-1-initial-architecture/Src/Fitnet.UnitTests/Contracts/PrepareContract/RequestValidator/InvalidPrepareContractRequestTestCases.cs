@@ -1,6 +1,6 @@
 namespace EvolutionaryArchitecture.Fitnet.UnitTests.Contracts.PrepareContract.RequestValidator;
 
-using EvolutionaryArchitecture.Fitnet.Contracts.PrepareContract;
+using EvolutionaryArchitecture.Contracts.Application.PrepareContract;
 
 internal sealed class InvalidPrepareContractRequestTestCases : TheoryData<PrepareContractRequest, string>
 {

@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="EvolutionaryArchitecture.Fitnet.UnitTests" />
+        <InternalsVisibleTo Include="EvolutionaryArchitecture.Fitnet.IntegrationTests" />
+        <InternalsVisibleTo Include="EvolutionaryArchitecture.Fitnet.ArchitectureTests" />
+    </ItemGroup>
+
+</Project>

@@ -1,18 +1,17 @@
 namespace EvolutionaryArchitecture.Fitnet.IntegrationTests.Common.TestEngine.IntegrationEvents.Handlers;
 
-using EvolutionaryArchitecture.Fitnet.Common.Events;
 using MediatR;
 
 internal sealed class IntegrationEventHandlerScope<TIntegrationEvent> : IDisposable
-where TIntegrationEvent : IIntegrationEvent
+where TIntegrationEvent : INotification
 {
     private readonly IServiceScope _serviceScope;
-    internal readonly IIntegrationEventHandler<TIntegrationEvent> IntegrationEventHandler;
+    internal readonly INotificationHandler<TIntegrationEvent> IntegrationEventHandler;
 
     public IntegrationEventHandlerScope(WebApplicationFactory<Program> applicationInMemoryFactory)
     {
         _serviceScope = applicationInMemoryFactory.Services.CreateScope();
-        IntegrationEventHandler = (IIntegrationEventHandler<TIntegrationEvent>)_serviceScope
+        IntegrationEventHandler = _serviceScope
             .ServiceProvider
             .GetRequiredService<INotificationHandler<TIntegrationEvent>>();
     }

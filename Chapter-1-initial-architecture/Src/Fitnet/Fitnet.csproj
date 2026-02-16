@@ -33,5 +33,10 @@
         <Link>Contracts.http</Link>
       </Content>
     </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Modules\Contracts\Contracts.Infrastructure\Contracts.Infrastructure.csproj" />
+        <ProjectReference Include="..\Modules\Contracts\Contracts.Application\Contracts.Application.csproj" />
+    </ItemGroup>
   
 </Project>

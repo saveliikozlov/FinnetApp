@@ -27,6 +27,8 @@
     
     <ItemGroup>
         <ProjectReference Include="..\Fitnet\Fitnet.csproj" />
+        <ProjectReference Include="..\Modules\Contracts\Contracts.Domain\Contracts.Domain.csproj" />
+        <ProjectReference Include="..\Modules\Contracts\Contracts.Application\Contracts.Application.csproj" />
     </ItemGroup>
     
 </Project>

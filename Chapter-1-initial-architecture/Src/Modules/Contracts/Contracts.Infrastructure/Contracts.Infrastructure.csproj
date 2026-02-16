@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Contracts.Application\Contracts.Application.csproj" />
+        <ProjectReference Include="..\Contracts.Domain\Contracts.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.1" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="EvolutionaryArchitecture.Fitnet" />
+        <InternalsVisibleTo Include="EvolutionaryArchitecture.Fitnet.UnitTests" />
+        <InternalsVisibleTo Include="EvolutionaryArchitecture.Fitnet.IntegrationTests" />
+        <InternalsVisibleTo Include="EvolutionaryArchitecture.Fitnet.ArchitectureTests" />
+    </ItemGroup>
+
+</Project>

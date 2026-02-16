@@ -1,15 +1,15 @@
 namespace EvolutionaryArchitecture.Fitnet.Passes.RegisterPass;
 
-using Contracts.SignContract.Events;
+using EvolutionaryArchitecture.Contracts.Application.SignContract.Events;
 using Data;
 using Data.Database;
 using Events;
-using EvolutionaryArchitecture.Fitnet.Common.Events;
 using EvolutionaryArchitecture.Fitnet.Common.Events.EventBus;
+using MediatR;
 
 internal sealed class ContractSignedEventHandler(
     PassesPersistence persistence,
-    IEventBus eventBus) : IIntegrationEventHandler<ContractSignedEvent>
+    IEventBus eventBus) : INotificationHandler<ContractSignedEvent>
 {
     public async Task Handle(ContractSignedEvent @event, CancellationToken cancellationToken)
     {

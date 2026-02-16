@@ -1,10 +1,10 @@
 namespace EvolutionaryArchitecture.Fitnet.IntegrationTests.Contracts.PrepareContract;
 
-using EvolutionaryArchitecture.Fitnet.Contracts;
-using EvolutionaryArchitecture.Fitnet.Contracts.PrepareContract;
+using EvolutionaryArchitecture.Contracts.Application.PrepareContract;
+using EvolutionaryArchitecture.Contracts.Application.SignContract;
+using EvolutionaryArchitecture.Contracts.Infrastructure.Endpoints;
 using Common.TestEngine;
 using Common.TestEngine.Configuration;
-using Fitnet.Contracts.SignContract;
 using Microsoft.AspNetCore.Mvc;
 using SignContract;
 

@@ -1,6 +1,6 @@
 namespace EvolutionaryArchitecture.Fitnet.UnitTests.Contracts.SignContract.RequestValidator;
 
-using EvolutionaryArchitecture.Fitnet.Contracts.SignContract;
+using EvolutionaryArchitecture.Contracts.Application.SignContract;
 using FluentValidation.TestHelper;
 
 public sealed class SignContractRequestValidatorTests

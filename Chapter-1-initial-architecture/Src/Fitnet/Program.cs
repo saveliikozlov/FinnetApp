@@ -1,9 +1,11 @@
 using EvolutionaryArchitecture.Fitnet.Common.Clock;
 using EvolutionaryArchitecture.Fitnet.Common.Documentation;
 using EvolutionaryArchitecture.Fitnet.Common.ErrorHandling;
+using EvolutionaryArchitecture.Fitnet.Common.Events.Adapters;
 using EvolutionaryArchitecture.Fitnet.Common.Events.EventBus;
 using EvolutionaryArchitecture.Fitnet.Common.Validation.Requests;
-using EvolutionaryArchitecture.Fitnet.Contracts;
+using EvolutionaryArchitecture.Contracts.Infrastructure;
+using ContractsEventBus = EvolutionaryArchitecture.Contracts.Application.IEventBus;
 using EvolutionaryArchitecture.Fitnet.Offers;
 using EvolutionaryArchitecture.Fitnet.Passes;
 using EvolutionaryArchitecture.Fitnet.Reports;
@@ -18,6 +20,7 @@ builder.Services.AddEventBus();
 builder.Services.AddRequestsValidations();
 builder.Services.AddClock();
 
+builder.Services.AddScoped<ContractsEventBus, ContractsEventBusAdapter>();
 builder.Services.AddPasses(builder.Configuration);
 builder.Services.AddContracts(builder.Configuration);
 builder.Services.AddOffers(builder.Configuration);
