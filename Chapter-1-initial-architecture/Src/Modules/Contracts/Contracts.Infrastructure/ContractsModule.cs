@@ -13,6 +13,7 @@ public static class ContractsModule
     {
         services.AddDatabase(configuration);
         services.AddScoped<IContractsService, ContractsService>();
+        services.AddHostedService<OutboxProcessor>();
 
         return services;
     }

@@ -38,6 +38,24 @@ internal sealed class ContractsService(
 
         var dateNow = timeProvider.GetUtcNow();
         contract.Sign(signedAt, dateNow);
+
+        var now = dateNow.UtcDateTime;
+
+        var outboxMessage = new OutboxMessage(
+            Guid.NewGuid(),
+            nameof(ContractSignedEvent),
+            System.Text.Json.JsonSerializer.Serialize(new { @event = "ContractSigned", id = contract.Id }),
+            now);
+        await persistence.OutboxMessages.AddAsync(outboxMessage, cancellationToken);
+
+        var existingSaga = await persistence.ContractSigningSagas
+            .SingleOrDefaultAsync(s => s.CorrelationId == contract.Id, cancellationToken);
+        if (existingSaga is null)
+        {
+            var saga = new ContractSigningSaga(Guid.NewGuid(), contract.Id, now);
+            await persistence.ContractSigningSagas.AddAsync(saga, cancellationToken);
+        }
+
         await persistence.SaveChangesAsync(cancellationToken);
 
         var @event = ContractSignedEvent.Create(
